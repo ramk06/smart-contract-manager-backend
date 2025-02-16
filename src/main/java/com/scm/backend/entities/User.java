@@ -1,11 +1,17 @@
 package com.scm.backend.entities;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 
@@ -39,6 +45,9 @@ public class User {
 	private Providers provider = Providers.SELF;
 	
 	private String emailToken;
+	
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+	private Set<Contact> contacts = new LinkedHashSet<>();
 	
 	
 }
